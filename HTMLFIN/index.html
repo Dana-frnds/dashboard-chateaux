@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Châteaux et demeures d’Île-de-France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Barre latérale -->
+  <aside class="sidebar">
+    <div class="logo">châteaux<span>.idf</span></div>
+    <p class="side-title">Général</p>
+    <nav>
+      <a href="#top" class="active">▦ Tableau de bord</a>
+      <a href="#carte">◎ Carte</a>
+      <a href="#categories">◔ Catégories</a>
+      <a href="#communes">☰ Communes</a>
+    </nav>
+    <p class="side-title">Projet</p>
+    <nav>
+      <a href="#apropos">ⓘ À propos</a>
+    </nav>
+    <div class="side-foot">TP2 · SIG &amp; CIM<br>ESTP 2026-27</div>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main id="top">
+    <header class="topbar">
+      <label class="search">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="Rechercher un château…" autocomplete="off">
+      </label>
+    </header>
+
+    <h1>Bonjour, voici le patrimoine d’Île-de-France</h1>
+    <p class="lead" id="lead">Chargement des données…</p>
+
+    <div id="fallback" class="fallback" hidden>
+      <b>Les fichiers GeoJSON n’ont pas pu être chargés automatiquement.</b>
+      Ouvrez la page via un serveur local (VS Code « Live Server »), ou sélectionnez ici vos 3 fichiers :
+      <input id="files" type="file" accept=".geojson,.json" multiple>
+    </div>
+
+    <section class="kpis">
+      <article class="card yellow"><span class="k-label">Châteaux et demeures</span><strong id="k-total">–</strong><small id="k-total-s"></small></article>
+      <article class="card pink"><span class="k-label">Catégorie dominante</span><strong id="k-top">–</strong><small id="k-top-s"></small></article>
+      <article class="card green"><span class="k-label">Communes concernées</span><strong id="k-com">–</strong><small id="k-com-s"></small></article>
+      <article class="card blue"><span class="k-label">Départements</span><strong id="k-dep">–</strong><small id="k-dep-s"></small></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel" id="carte">
+        <div class="panel-head"><h2>Carte des châteaux et demeures</h2></div>
+        <div class="chips" id="chips"></div>
+        <div id="map"></div>
+      </article>
+
+      <article class="panel" id="categories">
+        <div class="panel-head"><h2>Répartition par catégorie</h2></div>
+        <div class="chart-box"><canvas id="chart"></canvas></div>
+        <ul class="legend" id="legend"></ul>
+      </article>
+    </section>
+
+    <section class="panel read" id="apropos">
+      <h2>Lecture des résultats</h2>
+      <p id="reading"></p>
+      <p class="muted">Données : couches Châteaux et demeures, communes et départements d’Île-de-France, préparées dans ArcGIS Pro puis exportées en GeoJSON (WGS 84).</p>
+    </section>
+  </main>
+
+  <!-- Colonne de droite -->
+  <aside class="right">
+    <article class="card pink detail" id="detail">
+      <h2>Détails du site</h2>
+      <p class="muted-d">Cliquez sur un point de la carte pour afficher sa fiche.</p>
+    </article>
+
+    <article class="panel" id="communes">
+      <div class="panel-head"><h2>Communes les mieux dotées</h2></div>
+      <ul class="rank" id="rank"></ul>
+    </article>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
